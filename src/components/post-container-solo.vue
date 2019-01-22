@@ -21,12 +21,29 @@ export default {
       title: this.post.title,
       text: this.post.text,
       id: this.post.id,
+      likeBot: "Like",
+      likeClass: "rayedOut"
     }
   },
   methods: {
     formatDate(date) {
       return formatDate(date, 'MMM Do, YYYY - hh:mm a')
     },
+    updateLike(likeBot) {
+      if (this.likeBot === 'Like') {
+        this.likeBot = "Dislike"
+        this.addUserIdtoPost
+      } else {
+        this.likeBot = "Like"
+        this.removeUserIdtoPost
+      }
+    },
+    addUserIdtoPost() {
+
+    },
+    removeUserIdtoPost() {
+
+    }
   },
 }
 </script>
@@ -38,18 +55,15 @@ export default {
       <a :class="[$style.postTitle, $style.indent]">{{ post.title }}</a>
     </Baselink>-->
 
-    <BaseLink :params="{ id: post.id }" name="my-view">
-      <a>{{ post.title || 'Anonymous' }}</a> </BaseLink
-    >
 
 
-      <!--
+
       <input
         v-model="title"
         :class="[$style.postTitle, $style.indent]"
         :disabled="editable == false"
         :onclick="/myview/"
-      />-->
+      />
 
       <div :class="$style.indent">
         <div v-if="showAuthor" :class="$style.authorText">
@@ -96,12 +110,25 @@ export default {
     <div v-else :class="[$style.textContainer, $style.indent]">
       <p>{{ post.text }}</p>
     </div>
+    <div :class="$style.postHeader" style="padding:5px;">
+      <div>Authors Name: {{ post.author.name }}</div>
+      <div>Authors Email: {{ post.author.email }}</div>
+      <div>Authors Role: {{ post.author.role }}</div>
+      <button :class="likeClass" @click="updateLike(likeBot)">{{ likeBot }}</button>
+    </div>
   </div>
 </template>
 
 <style lang="scss" module>
 @import '@design';
 
+// new
+.GrayedOut{
+
+}
+.notGrayedOut{
+
+}
 // General
 
 .center {

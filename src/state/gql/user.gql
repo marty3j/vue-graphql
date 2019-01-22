@@ -19,6 +19,19 @@ query GetUserContent($id: ID!) {
   }
 }
 
+query GetPostSolo($id: ID!) {
+  post (id: $id) {
+    ...PostFields
+    isPublished
+    author {
+      id
+      name
+      email
+      role
+    }
+  }
+}
+
 query GetRecentPosts {
   recentPosts {
     ...PostFields

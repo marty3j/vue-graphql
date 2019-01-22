@@ -19,6 +19,18 @@ export default [
     },
   },
   {
+    path: '/myview/:id',
+    name: 'my-view',
+    component: require('@views/myview').default,
+    props: true,
+  },
+  {
+    path: '/testview/:id',
+    name: 'test-view',
+    component: require('@views/testview').default,
+    props: true,
+  },
+  {
     path: '/profile/:id',
     name: 'user-profile',
     component: () => lazyLoadView(import('@views/profile')),
